@@ -43,13 +43,26 @@
 
 static int str_to_cbus(char *str, int max_allowed)
 {
-#define MAX_OPTION 14
+//#define MAX_OPTION 14
+/* R chip options:
     const char* options[MAX_OPTION] =
     {
         "TXDEN", "PWREN", "RXLED", "TXLED", "TXRXLED", "SLEEP",
         "CLK48", "CLK24", "CLK12", "CLK6",
         "IO_MODE", "BITBANG_WR", "BITBANG_RD", "SPECIAL"
     };
+    */
+
+  // FT23x options
+#define MAX_OPTION 22
+    const char* options[MAX_OPTION] = {
+      "TRISTATE","RXLED","TXLED", "TXRXLED","PWREN",
+      "SLEEP","DRIVE_0","DRIVE_1","IOMODE","TXDEN",
+      "CLK24","CLK12","CLK6","BAT_DETECT","BAT_DETECT#",
+      "I2C_TXE#", "I2C_RXF#", "VBUS_SENSE", "BB_WR#",
+      "BBRD#", "TIME_STAMP", "AWAKE#"
+    };
+
     int i;
     max_allowed += 1;
     if (max_allowed > MAX_OPTION) max_allowed = MAX_OPTION;
@@ -126,7 +139,7 @@ int main(int argc, char *argv[])
         CFG_STR("filename", "", 0),
         CFG_BOOL("flash_raw", cfg_false, 0),
         CFG_BOOL("high_current", cfg_false, 0),
-        CFG_STR_LIST("cbus0", "{TXDEN,PWREN,RXLED,TXLED,TXRXLED,SLEEP,CLK48,CLK24,CLK12,CLK6,IO_MODE,BITBANG_WR,BITBANG_RD,SPECIAL}", 0),
+        CFG_STR_LIST("cbus0", "{TRISTATE,RXLED,TXLED,TXRXLED,PWREN,SLEEP,DRIVE_0,DRIVE_1,IOMODE,TXDEN,CLK24,CLK12,CLK6,BAT_DETECT,BAT_DETECT,I2C_TXE,I2C_RXF,VBUS_SENSE,BB_WR,BBRD,TIME_STAMP,AWAKE}", 0),
         CFG_STR_LIST("cbus1", "{TXDEN,PWREN,RXLED,TXLED,TXRXLED,SLEEP,CLK48,CLK24,CLK12,CLK6,IO_MODE,BITBANG_WR,BITBANG_RD,SPECIAL}", 0),
         CFG_STR_LIST("cbus2", "{TXDEN,PWREN,RXLED,TXLED,TXRXLED,SLEEP,CLK48,CLK24,CLK12,CLK6,IO_MODE,BITBANG_WR,BITBANG_RD,SPECIAL}", 0),
         CFG_STR_LIST("cbus3", "{TXDEN,PWREN,RXLED,TXLED,TXRXLED,SLEEP,CLK48,CLK24,CLK12,CLK6,IO_MODE,BITBANG_WR,BITBANG_RD,SPECIAL}", 0),
